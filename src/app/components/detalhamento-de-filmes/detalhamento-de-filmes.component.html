@@ -1,0 +1,65 @@
+<div
+  *ngIf="detalhes"
+  class="app-banner-fundo"
+  [style.background-image]="'url(' + detalhes.imagemBackgroud + ')'"
+>
+  <div class="app-overlay-banner">
+    <main class="container py-5 text-white">
+      <section aria-label="Detalhes do Filme" class="row g-3 my-auto">
+        <div class="col-lg-3">
+          <img
+            [src]="detalhes.image"
+            alt="Poster de {{ detalhes.title }}"
+            class="img-fluid rounded-3 shadow"
+            style="border: 5px solid #fff; max-height: 450px;"
+          />
+        </div>
+        <div class="col text-white">
+          <header class="d-flex flex-column gap-2">
+            <h1 class="mb-0 display-4 fw-bold">{{ detalhes.title }}</h1>
+            <div class="d-flex flex-wrap align-items-center gap-3 fs-5">
+              <small>{{ detalhes.lancamento }}</small>
+              <span class="badge bg-success fs-6">{{ detalhes.notaEmPorcentagem }}%</span>
+            </div>
+            <p class="fs-6 ">{{ detalhes.tagline }}</p>
+          </header>
+
+          <article
+            *ngIf="detalhes.video.length >= 0"
+            class="ratio ratio-16x9 mt-4"
+          >
+            <iframe
+              [attr.aria-label]="'Trailer de ' + detalhes.title"
+              [src]="detalhes.video[0].sourceUrl"
+              type="video/mp4"
+              class="rounded-3"
+            ></iframe>
+          </article>
+
+          <article class="mt-4">
+            <h3>Sinopse</h3>
+            <p class="fs-5">{{ detalhes.sinopse }}</p>
+          </article>
+        </div>
+      </section>
+      <section *ngIf="detalhes" class="app-elenco-base container-fluid">
+        <h4 class="text-white ms-3">Elenco Principal</h4>
+        <div class="row flex-nowrap overflow-x-scroll g-2 pb-3 mt-4">
+          <div *ngFor="let membro of detalhes.elenco" class="col-4 col-lg-2">
+            <div class="card rounded-3 h-100">
+              <img class="card-img-top" [src]="membro.image" [alt]="membro.name" />
+              <div class="card-body px-2">
+                <p class="card-title fw-semibold mb-0">{{ membro.name }}</p>
+                <small class="text-secondary text-wrap">{{ membro.papel }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+</div>
+
+

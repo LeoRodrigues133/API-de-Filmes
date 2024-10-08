@@ -1,0 +1,27 @@
+.app-fundo-navbar {
+  background-color: #000000;
+}
+
+.app-botao-navbar {
+  color: #ffffff;
+
+  min-width: 130px;
+
+  text-align: center;
+  font-size: 20px;
+
+  &::after {
+    content: "";
+
+    width: 0px;
+    height: 1px;
+
+    display: block;
+    background: rgba(255, 0, 0, 0.5);
+    transition: 300ms ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
