@@ -3,5 +3,6 @@ export interface ListagemDeFilme{
   titulo: string,
   lancamento: string,
   imagem: string,
-  notaEmPorcentagem: string
+  notaEmPorcentagem: string,
+  favorite_movie: boolean
 }

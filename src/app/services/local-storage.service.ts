@@ -41,7 +41,7 @@ export class LocalStorageService {
     return this.favoritos.includes(id);
   }
 
-  private getFavoritos(): number[] {
+  public getFavoritos(): number[] {
     const jsonString = localStorage.getItem(this.key);
 
     if (!jsonString) return [];

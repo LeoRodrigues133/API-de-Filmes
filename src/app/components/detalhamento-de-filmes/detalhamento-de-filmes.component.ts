@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { detalhamentoDeFilme } from '../../models/detalhamento-de-filme';
 import { ActivatedRoute } from '@angular/router';
-import { FilmeService } from '../../services/listagem-de-filmes.service';
+import { FilmeService } from '../../services/api.service';
 import { formatDate, NgClass, NgFor, NgIf } from '@angular/common';
 import { generoFilme } from '../../models/genero-filme';
 import { elencoFilme } from '../../models/elenco-do-filme';
@@ -17,9 +17,6 @@ import { LocalStorageService } from '../../services/local-storage.service';
   styleUrl: './detalhamento-de-filmes.component.scss',
 })
 export class DetalhamentoDeFilmesComponent {
-  alterarStatusFavorito(detalhes: number) {
-    throw new Error('Method not implemented.');
-  }
   public detalhes?: detalhamentoDeFilme;
 
   constructor(
@@ -37,7 +34,7 @@ export class DetalhamentoDeFilmesComponent {
       throw new Error('Não foi possivel carregar informações sobre o filme.');
     }
 
-    this.filmeService.DetalhamentoDeFilmePorId(id).subscribe((f) => {
+    this.filmeService.detalhamentoDeFilmePorId(id).subscribe((f) => {
       this.detalhes = this.mapearDetalhamentoDeFilme(f);
 
       console.log(f);
