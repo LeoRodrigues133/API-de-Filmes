@@ -7,6 +7,7 @@ import { generoFilme } from '../../models/genero-filme';
 import { elencoFilme } from '../../models/elenco-do-filme';
 import { DomSanitizer } from '@angular/platform-browser';
 import { videoFilme } from '../../models/video-filme';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-detalhamento-de-filmes',
@@ -23,6 +24,7 @@ export class DetalhamentoDeFilmesComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private localStorageService: LocalStorageService,
     private filmeService: FilmeService,
     private domSanitizer: DomSanitizer
   ) {
@@ -40,6 +42,21 @@ export class DetalhamentoDeFilmesComponent {
 
       console.log(f);
     });
+  }
+
+  public changeStatusFavorito(id:number){
+    if(!this.detalhes) return;
+
+    if(this.localStorageService.alreadyFavorito(id)){
+
+      this.detalhes.favorite_movie = false;
+
+      this.localStorageService.removeFavorito(id);
+    }else{
+      this.detalhes.favorite_movie = true;
+
+      this.localStorageService.saveFavoritos(id);
+    }
   }
 
   private mapearDetalhamentoDeFilme(obj: any): detalhamentoDeFilme {
@@ -71,7 +88,7 @@ export class DetalhamentoDeFilmesComponent {
 
       production_companies: obj.production_companies,
 
-      homepage: obj.homepage,
+      favorite_movie: this.localStorageService.alreadyFavorito(obj.id),
     };
   }
   private mapearVideoFilme(obj: any): videoFilme {

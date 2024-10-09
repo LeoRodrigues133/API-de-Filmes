@@ -15,5 +15,5 @@ export interface detalhamentoDeFilme {
   tagline: string;
   genres: string;
   production_companies: string;
-  homepage: string;
+  favorite_movie:boolean;
 }
