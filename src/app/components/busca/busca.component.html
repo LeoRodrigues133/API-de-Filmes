@@ -25,10 +25,17 @@
               aria-expanded="false"
               aria-haspopup="true"
             >
-              {{ categoriaSelecionada || "Selecionar" }}
+              {{ categoriaSelecionada || "Tudo" }}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownCategoria">
               <li>
+                <a
+                  class="dropdown-item"
+                  (click)="
+                    busca((categoriaSelecionada = 'multi'), inputBusca.value)
+                  "
+                  >Tudo</a
+                >
                 <a
                   class="dropdown-item"
                   (click)="
@@ -74,8 +81,7 @@
   </div>
 </div>
 
-
-  <section class="container my-4"*ngIf="inputBusca.value.length > 1">
+<section class="container my-4" *ngIf="inputBusca.value.length > 1">
   <h1 class="title text-center my-5">Resultados da Busca</h1>
   <div class="row justify-content-between">
     <div
@@ -106,5 +112,4 @@
       </div>
     </div>
   </div>
-
 </section>

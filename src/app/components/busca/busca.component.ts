@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FilmeService } from '../../services/api.service';
 import { ResultadoBuscaDeFilmes } from '../../models/busca-de-filmes';
 import { ListagemDeFilme } from '../../models/listagem-de-filmes';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { formatDate, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ListagemDeFilmesComponent } from '../listagem-de-filmes/listagem-de-filmes.component';
 
 @Component({
   selector: 'app-busca',
@@ -14,25 +15,22 @@ import { RouterLink } from '@angular/router';
   styleUrl: './busca.component.scss',
 })
 export class BuscaComponent implements OnInit {
-  public resultado?: ResultadoBuscaDeFilmes;
   public categoriaSelecionada: string = 'multi';
+  public resultado?: ResultadoBuscaDeFilmes;
+
+  @Output() limparFilmes: EventEmitter<void> = new EventEmitter<void>();
+
   constructor(
     private filmeService: FilmeService,
-    private localStorage: LocalStorageService
+    private localStorage: LocalStorageService,
   ) {}
 
-  ngOnInit(): void {
-    // Collection
-    // Company
-    // Keyword
-    // Movie
-    // Multi
-    // Person
-    // TV
-  }
+  ngOnInit(): void {}
 
   public busca(categoria: string, query: string) {
-    if (query.length < 1) return;
+    if (query.length > 0) return;
+
+    this.limparFilmes.emit();
 
     this.filmeService
       .ferramentaDeBusca(categoria, query)
@@ -51,6 +49,7 @@ export class BuscaComponent implements OnInit {
       ),
     };
   }
+
   private mapearListagemBusca(obj: any): ListagemDeFilme {
     return {
       id: obj.id,
