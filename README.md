@@ -1,27 +1,77 @@
-# ApiGerenciamentoDeFilmes2024
+# API de Gerenciamento de Filmes 2024
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
+O projeto **API de Gerenciamento de Filmes 2024** tem como objetivo fornecer uma API para gerenciar um catálogo de filmes, permitindo operações de CRUD (Criar, Ler, Atualizar e Deletar) para filmes e outras entidades relacionadas.
 
-## Development server
+## Requisitos Funcionais
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- O sistema deve permitir o cadastro de novos filmes.
+- O sistema deve permitir a edição de informações dos filmes.
+- O sistema deve permitir a remoção de filmes do catálogo.
+- O sistema deve permitir a listagem dos filmes cadastrados.
+- O sistema deve armazenar e recuperar informações sobre diretores, gêneros e atores.
+- O sistema deve permitir consultas personalizadas baseadas em filtros.
 
-## Code scaffolding
+## Requisitos Não Funcionais
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**Persistência das Informações**
+- Os dados devem ser armazenados em um banco de dados utilizando ORM (Entity Framework Core).
 
-## Build
+**Arquitetura**
+- O projeto deve seguir os princípios da arquitetura em camadas.
+- Deve-se utilizar boas práticas de desenvolvimento, como injeção de dependência.
+- A API deve seguir o padrão RESTful.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**Segurança**
+- Implementação de autenticação e autorização para acesso aos endpoints.
 
-## Running unit tests
+## Tecnologias Utilizadas
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **.NET 8.0**
+- **Entity Framework Core**
+- **SQL Server**
+- **Swagger** para documentação da API
+- **Angular** (para a interface do usuário)
 
-## Running end-to-end tests
+## Requisitos
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- .NET SDK (recomendado .NET 8.0 ou superior) para compilação e execução do projeto.
+- Banco de dados SQL Server instalado ou configurado via Docker.
 
-## Further help
+## Como Usar
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Clone o Repositório
+
+```sh
+git clone https://github.com/Kriegerl1/Api-Gerenciamento-de-Filmes-2024.git
+```
+
+### Navegue até a pasta raiz da solução
+
+```sh
+cd Api-Gerenciamento-de-Filmes-2024
+```
+
+### Restaure as dependências
+
+```sh
+dotnet restore
+```
+
+### Execute a migração do banco de dados
+
+```sh
+dotnet ef database update
+```
+
+### Execute o projeto
+
+```sh
+dotnet run
+```
+
+### Acesse a documentação da API
+Após executar o projeto, a documentação via Swagger estará disponível em:
+
+```
+http://localhost:5000/swagger
+```
