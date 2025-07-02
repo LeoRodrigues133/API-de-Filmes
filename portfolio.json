@@ -1,5 +1,5 @@
 {
-  "title": "Sistema de Catálogo de Cinemas",
-  "description": "Sistema de catálogo de cinema para gerenciar filmes, gêneros, sinopses e exibições disponíveis.",
+  "title": "Api TMDb",
+  "description": "Sistema que faz a comunicação com a Api The Movie Database de catálogo de cinema para gerenciar filmes, gêneros, sinopses e exibições disponíveis.",
   "gif":"https://raw.githubusercontent.com/LeoRodrigues133/Api-Gerenciamento-de-Filmes-2024/refs/heads/master/public/apresentacao.gif"
 }
