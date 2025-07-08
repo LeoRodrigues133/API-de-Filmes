@@ -1,5 +1,5 @@
 {
   "title": "Aplicativo Cliente TMDb",
-  "description": "Sistema que faz a comunicação com a Api The Movie Database(TMDB) de catálogo de filmes e informações adicionais.",
+  "description": "Sistema de comunicação com a Api The Movie Database(TMDB) para catálogo de filmes e informações adicionais.",
   "gif":"https://raw.githubusercontent.com/LeoRodrigues133/Api-Gerenciamento-de-Filmes-2024/refs/heads/master/public/apresentacao.gif"
 }
