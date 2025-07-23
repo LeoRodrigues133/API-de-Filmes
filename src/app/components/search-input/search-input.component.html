@@ -1,0 +1,24 @@
+        <form class="d-flex justify-content-center">
+          <div class="input-group w-75">
+            <input (input)="busca(categoriaSelecionadaValor,inputBusca.value)" #inputBusca type="text"
+              class="form-control bg-white text-dark" placeholder="Buscar" aria-label="Buscar" />
+
+            <button class="btn btn-outline-secondary dropdown-toggle w-25" role="button" id="dropdownCategoria"
+              data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+              {{categoriaSelecionada}}
+            </button>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownCategoria">
+              <li *ngFor="let categoria of categorias">
+                <a class="dropdown-item"
+
+                  (click)="categoriaSelecionada = categoria.nome;
+                  categoriaSelecionadaValor = categoria.valor;
+                  busca(categoriaSelecionadaValor, inputBusca.value)">
+
+                  {{ categoria.nome }}</a>
+              </li>
+            </ul>
+
+          </div>
+        </form>

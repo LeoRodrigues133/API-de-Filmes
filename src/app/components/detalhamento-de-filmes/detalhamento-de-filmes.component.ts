@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { detalhamentoDeFilme } from '../../models/detalhamento-de-filme';
 import { ActivatedRoute } from '@angular/router';
-import { FilmeService } from '../../services/api.service';
-import { formatDate, NgClass, NgFor, NgIf } from '@angular/common';
-import { generoFilme } from '../../models/genero-filme';
-import { elencoFilme } from '../../models/elenco-do-filme';
-import { DomSanitizer } from '@angular/platform-browser';
 import { videoFilme } from '../../models/video-filme';
+import { generoFilme } from '../../models/genero-filme';
+import { DomSanitizer } from '@angular/platform-browser';
+import { FilmeService } from '../../services/api.service';
+import { elencoFilme } from '../../models/elenco-do-filme';
+import { formatDate, NgFor, NgIf } from '@angular/common';
+import { detalhamentoDeFilme } from '../../models/detalhamento-de-filme';
 import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-detalhamento-de-filmes',
   standalone: true,
-  imports: [DetalhamentoDeFilmesComponent, NgClass, NgIf, NgFor],
+  imports: [NgIf, NgFor],
   templateUrl: './detalhamento-de-filmes.component.html',
   styleUrl: './detalhamento-de-filmes.component.scss',
 })
@@ -34,22 +34,22 @@ export class DetalhamentoDeFilmesComponent {
       throw new Error('Não foi possivel carregar informações sobre o filme.');
     }
 
-    this.filmeService.detalhamentoDeFilmePorId(id).subscribe((f) => {
+    this.filmeService.DetailMovieById(id).subscribe((f) => {
       this.detalhes = this.mapearDetalhamentoDeFilme(f);
 
       console.log(f);
     });
   }
 
-  public changeStatusFavorito(id:number){
-    if(!this.detalhes) return;
+  public changeStatusFavorito(id: number) {
+    if (!this.detalhes) return;
 
-    if(this.localStorageService.alreadyFavorito(id)){
+    if (this.localStorageService.alreadyFavorito(id)) {
 
       this.detalhes.favorite_movie = false;
 
       this.localStorageService.removeFavorito(id);
-    }else{
+    } else {
       this.detalhes.favorite_movie = true;
 
       this.localStorageService.saveFavoritos(id);
@@ -59,18 +59,12 @@ export class DetalhamentoDeFilmesComponent {
   private mapearDetalhamentoDeFilme(obj: any): detalhamentoDeFilme {
     return {
       id: obj.id,
-
       title: obj.title,
       sinopse: obj.overview,
       lancamento: formatDate(obj.release_date, 'mediumDate', 'pt-BR'),
-
       notaEmPorcentagem: (obj.vote_average * 10).toFixed(1),
-
       image: 'https://image.tmdb.org/t/p/w300/' + obj.poster_path,
-
-      imagemBackgroud:
-        'https://image.tmdb.org/t/p/original/' + obj.backdrop_path,
-
+      imagemBackgroud: 'https://image.tmdb.org/t/p/original/' + obj.backdrop_path,
       budget: obj.budget,
       tagline: obj.tagline,
 
@@ -111,5 +105,13 @@ export class DetalhamentoDeFilmesComponent {
       papel: obj.character,
       image: 'https://image.tmdb.org/t/p/w300' + obj.profile_path,
     };
+  }
+    public mapearCorDaNota(avaliacaoString: string): string {
+    const avaliacao = Number(avaliacaoString);
+
+    if (avaliacao > 0 && avaliacao <= 30) return 'app-borda-nota-mais-baixa';
+    else if (avaliacao > 30 && avaliacao <= 50) return 'app-borda-nota-baixa';
+    else if (avaliacao > 50 && avaliacao <= 75) return 'app-borda-nota-media';
+    else return 'app-borda-nota-alta';
   }
 }

@@ -7,19 +7,31 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root',
 })
 export class FilmeService {
-  private readonly urlApi: string = 'https://api.themoviedb.org/3/';
-  private linguagem: string = '&language=pt-BR';
-  private rota: string = '';
-  constructor(private http: HttpClient) {}
 
-  public selecionarFilmesPopulares(page: number): Observable<any> {
-    this.rota = 'movie';
-    const urlCompleto = `${this.urlApi}${this.rota}/popular?page=${page}${this.linguagem}`;
+  readonly urlApi: string = 'https://api.themoviedb.org/3/';
+  linguagem: string = '&language=pt-BR';
+
+  constructor(private http: HttpClient) { }
+
+  public SelectByPopular(page: number = 1, rota: string = 'movie'): Observable<any> {
+    const urlCompleto = `${this.urlApi}${rota}/popular?page=${page}${this.linguagem}`;
 
     return this.http.get<any>(urlCompleto, this.getAuthorizationHeaders());
   }
 
-  private getAuthorizationHeaders() {
+  public SearchTool(categoria: string = 'multi', query: string, page: number = 1, rota: string = 'search'): Observable<any> {
+    const urlCompleto = `${this.urlApi}${rota}/${categoria}?query=${query}&include_adult=false&${this.linguagem}&page=${page}`;
+    console.log(urlCompleto);
+    return this.http.get<any>(urlCompleto, this.getAuthorizationHeaders());
+  }
+
+  public DetailMovieById(id: any, rota: string = 'movie'): Observable<any> {
+    const urlCompleto = `${this.urlApi}${rota}/${id}?append_to_response=videos,credits&${this.linguagem}`;
+
+    return this.http.get<any>(urlCompleto, this.getAuthorizationHeaders());
+  }
+
+    getAuthorizationHeaders() {
     return {
       method: 'GET',
       headers: {
@@ -27,22 +39,5 @@ export class FilmeService {
         Authorization: environment.API_KEY,
       },
     };
-  }
-
-  public ferramentaDeBusca(
-    categoria: string = 'multi',
-    query: string,
-    page: number = 1
-  ): Observable<any> {
-    this.rota = 'search';
-    const urlCompleto = `${this.urlApi}${this.rota}/${categoria}?query=${query}&include_adult=false&${this.linguagem}&page=${page}`;
-
-    return this.http.get<any>(urlCompleto, this.getAuthorizationHeaders());
-  }
-
-  public detalhamentoDeFilmePorId(id: any): Observable<any> {
-    const urlCompleto = `${this.urlApi}${this.rota}/${id}?append_to_response=videos,credits&${this.linguagem}`;
-
-    return this.http.get<any>(urlCompleto, this.getAuthorizationHeaders());
   }
 }

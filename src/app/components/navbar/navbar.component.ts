@@ -1,14 +1,13 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ListagemDeFilmesComponent } from '../listagem-de-filmes/listagem-de-filmes.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [NgClass, RouterLink, ListagemDeFilmesComponent],
+  imports: [NgClass, RouterLink],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'], // corrigido para styleUrls no plural
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
 

@@ -1,39 +1,35 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FilmeService } from '../../services/api.service';
+import { RouterLink } from '@angular/router';
+import { formatDate, NgFor, NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { ResultadoBuscaDeFilmes } from '../../models/busca-de-filmes';
+import { SearchInputComponent } from "../search-input/search-input.component";
 import { ListagemDeFilme } from '../../models/listagem-de-filmes';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { formatDate, NgFor, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { ListagemDeFilmesComponent } from '../listagem-de-filmes/listagem-de-filmes.component';
+import { FilmeService } from '../../services/api.service';
 
 @Component({
   selector: 'app-busca',
   standalone: true,
-  imports: [NgIf, NgFor, RouterLink],
-  templateUrl: './busca.component.html',
-  styleUrl: './busca.component.scss',
+  imports: [RouterLink, SearchInputComponent, NgIf, NgFor],
+  templateUrl: './search.component.html',
+  styleUrl: './search.component.scss',
 })
-export class BuscaComponent implements OnInit {
-  public categoriaSelecionada: string = 'multi';
+export class SearchComponent implements OnInit {
   public resultado?: ResultadoBuscaDeFilmes;
-
-  @Output() limparFilmes: EventEmitter<void> = new EventEmitter<void>();
+  Busca: string = '';
 
   constructor(
-    private filmeService: FilmeService,
     private localStorage: LocalStorageService,
-  ) {}
+    private filmeService:FilmeService
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  public busca(categoria: string, query: string) {
-    if (query.length > 0) return;
-
-    this.limparFilmes.emit();
+  public realizarBusca(event: { categoria: string, query: string }) {
+    this.Busca = event.query;
 
     this.filmeService
-      .ferramentaDeBusca(categoria, query)
+      .SearchTool(event.categoria, event.query)
       .subscribe((resposta) => {
         this.resultado = this.mapearResultadoBusca(resposta);
       });
@@ -58,7 +54,7 @@ export class BuscaComponent implements OnInit {
         ? formatDate(obj.release_date, 'mediumDate', 'pt-BR')
         : 'Indisponível',
       imagem: 'https://image.tmdb.org/t/p/w300/' + obj.poster_path,
-      notaEmPorcentagem: (obj.vote_average * 10).toFixed(1),
+      notaEmPorcentagem: (obj.vote_average * 10),
       favorite_movie: this.localStorage.alreadyFavorito(obj.id),
     };
   }

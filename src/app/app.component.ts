@@ -5,12 +5,11 @@ import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { BuscaComponent } from "./components/busca/busca.component";
-import { ListagemDeFilmesComponent } from './components/listagem-de-filmes/listagem-de-filmes.component';
+import { SearchComponent } from './components/search/search.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, BuscaComponent,ListagemDeFilmesComponent],
+  imports: [RouterOutlet, NavbarComponent, SearchComponent],
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -18,9 +17,5 @@ import { ListagemDeFilmesComponent } from './components/listagem-de-filmes/lista
 export class AppComponent {
   constructor() {
     registerLocaleData(localePtBr);
-  }
-
-  limparFilmesListagem(listagemFilmes: ListagemDeFilmesComponent) {
-    listagemFilmes.limparFilmes();
   }
 }

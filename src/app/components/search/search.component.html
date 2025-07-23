@@ -1,0 +1,35 @@
+<div class="app-banner-busca py-5 bg-dark text-light">
+  <div class="container">
+    <div class="row">
+      <header class="col text-center">
+        <div class="mb-4">
+          <h1 class="fw-bolder">Bem-vindo(a),</h1>
+          <h2 class="fs-3">Uma infinidade de possibilidades.</h2>
+        </div>
+        <app-search-input (buscando)="realizarBusca($event)"></app-search-input>
+      </header>
+    </div>
+  </div>
+</div>
+
+<section class="container my-4" *ngIf="Busca.length > 1">
+  <h1 class="title text-center my-5">Resultados da Busca</h1>
+  <div class="row justify-content-between">
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let filme of resultado?.filmes">
+      <div class="card h-100 shadow-sm border-0">
+        <a class="stretched-link" [routerLink]="['/filme', filme.id]"></a>
+
+        <img [src]="filme.imagem" alt="Imagem do filme" class="card-img-top rounded-top" />
+        <i *ngIf="filme.favorite_movie" id="app-fav-icon" class="bi bi-heart-fill link-danger fs-3"></i>
+
+        <div class="card-body d-flex flex-column justify-content-between">
+          <p class="card-title fw-bold text-dark mb-1">{{ filme.titulo }}</p>
+
+          <small class="card-subtitle text-muted mt-2">
+            {{ filme.lancamento }}
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
