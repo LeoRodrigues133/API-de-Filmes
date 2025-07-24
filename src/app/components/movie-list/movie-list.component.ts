@@ -1,10 +1,11 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component,  OnInit, Output } from '@angular/core';
 import { formatDate, NgFor } from '@angular/common';
 import { FilmeService } from '../../services/api.service';
 import { ListagemDeFilme } from '../../models/Listagem-de-Filme';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { CardDeFilmesComponent } from "../shared/movie-card/movie-card.component";
 import { PaginationButtonComponent } from "../shared/pagination-button/pagination-button.component";
+import { BannerServiceService } from '../../services/banner-service.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -19,7 +20,8 @@ export class MovieListComponent implements OnInit {
 
   constructor(
     private filmeService: FilmeService,
-    private localStorage: LocalStorageService
+    private localStorage: LocalStorageService,
+    private bannerService: BannerServiceService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +34,9 @@ export class MovieListComponent implements OnInit {
       const resultado = f.results as any[];
 
       const filmeMapeados = resultado.map((obj) => this.mapearListagemDeFilmes(obj));
+
+      this.bannerService.updateBannerImages(filmeMapeados.map(filme => filme.imagem)); // Update banner images
+
       this.filmes.push(...filmeMapeados);
       this.pagina++;
     });

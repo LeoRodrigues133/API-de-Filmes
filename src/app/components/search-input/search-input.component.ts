@@ -1,6 +1,6 @@
+import {  NgFor } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ResultadoBuscaDeFilmes } from '../../models/busca-de-filmes';
-import {  NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-search-input',
@@ -28,6 +28,7 @@ export class SearchInputComponent {
   public busca(categoria: string, query: string) {
     if (query.length > 0)
       this.buscando.emit({ categoria, query });
+
   }
 
 }

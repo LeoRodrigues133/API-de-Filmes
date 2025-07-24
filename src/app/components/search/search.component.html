@@ -1,10 +1,10 @@
-<div class="app-banner-busca py-5 bg-dark text-light">
+<div class="app-banner-busca py-5 bg-dark text-light" [ngStyle]="{'background-image': 'url(' + bannerUrl + ')'}">
   <div class="container">
     <div class="row">
       <header class="col text-center">
         <div class="mb-4">
-          <h1 class="fw-bolder">Bem-vindo(a),</h1>
-          <h2 class="fs-3">Uma infinidade de possibilidades.</h2>
+          <h1 class="fw-bolder">Bem-vindo(a)</h1>
+          <h2 class="fs-3 lead">Explore um mundo de possibilidades.</h2>
         </div>
         <app-search-input (buscando)="realizarBusca($event)"></app-search-input>
       </header>

@@ -1,29 +1,49 @@
 import { RouterLink } from '@angular/router';
-import { formatDate, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { formatDate, NgFor, NgIf, NgStyle } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { ResultadoBuscaDeFilmes } from '../../models/busca-de-filmes';
 import { SearchInputComponent } from "../search-input/search-input.component";
 import { ListagemDeFilme } from '../../models/Listagem-de-Filme';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { FilmeService } from '../../services/api.service';
+import { BannerServiceService } from '../../services/banner-service.service';
+import { range } from 'rxjs';
 
 @Component({
   selector: 'app-busca',
   standalone: true,
-  imports: [RouterLink, SearchInputComponent, NgIf, NgFor],
+  imports: [RouterLink, SearchInputComponent, NgIf, NgFor, NgStyle],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
 export class SearchComponent implements OnInit {
   public resultado?: ResultadoBuscaDeFilmes;
   Busca: string = '';
+  bannerUrl: string = '';
 
   constructor(
     private localStorage: LocalStorageService,
-    private filmeService:FilmeService
+    private filmeService: FilmeService,
+    private bannerService: BannerServiceService // Assuming this service is used to update banner images
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.bannerService.bannerImages$.subscribe(images => {
+      if (images.length > 0) {
+
+        this.randomizeBannerImage();
+      }
+    });
+
+  }
+
+  randomizeBannerImage() {
+    const images = this.bannerService.bannerImagesSource.getValue();
+    if (images.length > 0) {
+      const randomIndex = Math.floor(Math.random() * images.length);
+      this.bannerUrl = images[randomIndex];
+    }
+  }
 
   public realizarBusca(event: { categoria: string, query: string }) {
     this.Busca = event.query;

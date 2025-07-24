@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-
 import { LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
-import localePtBr from '@angular/common/locales/pt';
 import { RouterOutlet } from '@angular/router';
+import localePtBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchComponent } from './components/search/search.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
