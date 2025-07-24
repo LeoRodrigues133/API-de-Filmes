@@ -2,5 +2,5 @@
   "title": "Api TMDb",
   "description": "Sistema que faz a comunicação com a Api The Movie Database de catálogo de cinema para gerenciar filmes, gêneros, sinopses e exibições disponíveis.",
   "gif":"https://raw.githubusercontent.com/LeoRodrigues133/Api-Gerenciamento-de-Filmes-2024/refs/heads/master/public/apresentacao.gif",
-  "lastCommit":"Modificado nomes de alguns componentes para seguir padrão inglês da Api.Finalizada reestruturação do projeto."
+  "lastCommit":"Implementado alertas; Implementado feature de randomização do banner url; Corrigido pequenos erros de layout;"
 }
