@@ -8,6 +8,7 @@ import { elencoFilme } from '../../models/elenco-do-filme';
 import { formatDate, NgFor, NgIf } from '@angular/common';
 import { detalhamentoDeFilme } from '../../models/detalhamento-de-filme';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detalhamento-de-filmes',
@@ -23,7 +24,8 @@ export class DetalhamentoDeFilmesComponent {
     private route: ActivatedRoute,
     private localStorageService: LocalStorageService,
     private filmeService: FilmeService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private toastr: ToastrService
   ) {
   }
 
@@ -49,10 +51,22 @@ export class DetalhamentoDeFilmesComponent {
       this.detalhes.favorite_movie = false;
 
       this.localStorageService.removeFavorito(id);
+      this.showAlert('Filme removido dos favoritos!', 'Removido', 'success');
     } else {
       this.detalhes.favorite_movie = true;
 
       this.localStorageService.saveFavoritos(id);
+      this.showAlert('Filme adicionado aos favoritos!', 'Adicionado', 'success');
+    }
+
+  }
+
+  private showAlert(message: string, title: string, type: 'success' | 'error' = 'success') {
+    if (type === 'success') {
+      this.toastr.success(message, title);
+    } else {
+      this.toastr.error(message, title);
+
     }
   }
 

@@ -2,13 +2,13 @@ import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-icone-avaliacao',
+  selector: 'app-rate-icon',
   standalone: true,
   imports: [NgClass],
-  templateUrl: './icone-avaliacao.component.html',
-  styleUrl: './icone-avaliacao.component.scss'
+  templateUrl: './rate-icon.component.html',
+  styleUrl: './rate-icon.component.scss'
 })
-export class IconeAvaliacaoComponent {
+export class RateIconComponent {
 @Input ({required: true}) avaliacao:number;
 @Input ({required: false}) tamanho:number;
 
