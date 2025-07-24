@@ -13,8 +13,8 @@ import { LocalStorageService } from '../../services/local-storage.service';
   selector: 'app-detalhamento-de-filmes',
   standalone: true,
   imports: [NgIf, NgFor],
-  templateUrl: './detalhamento-de-filmes.component.html',
-  styleUrl: './detalhamento-de-filmes.component.scss',
+  templateUrl: './movie-detail.component.html',
+  styleUrl: './movie-detail.component.scss',
 })
 export class DetalhamentoDeFilmesComponent {
   public detalhes?: detalhamentoDeFilme;
@@ -106,7 +106,7 @@ export class DetalhamentoDeFilmesComponent {
       image: 'https://image.tmdb.org/t/p/w300' + obj.profile_path,
     };
   }
-    public mapearCorDaNota(avaliacaoString: string): string {
+  public mapearCorDaNota(avaliacaoString: string): string {
     const avaliacao = Number(avaliacaoString);
 
     if (avaliacao > 0 && avaliacao <= 30) return 'app-borda-nota-mais-baixa';

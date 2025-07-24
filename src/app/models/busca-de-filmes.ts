@@ -1,4 +1,4 @@
-import { ListagemDeFilme } from './listagem-de-filmes';
+import { ListagemDeFilme } from './Listagem-de-Filme';
 
 export interface ResultadoBuscaDeFilmes {
   pagina: number;

@@ -8,12 +8,5 @@
   </div>
 </section>
 
-<section
-  (click)="SearchPopularMovies()"
-  aria-label="paginação"
-  class="row justify-content-center my-5"
->
-  <button class="col-md-6 col-lg-4 btn btn-outline-dark rounded-pill shadow-sm">
-    Mostrar Mais
-  </button>
-</section>
+
+<app-pagination-button (onPagination)="loadPopularMovies()"></app-pagination-button>

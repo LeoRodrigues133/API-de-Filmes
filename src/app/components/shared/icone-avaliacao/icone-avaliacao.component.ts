@@ -1,6 +1,5 @@
 import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ListagemDeFilme } from '../../../models/listagem-de-filmes';
 
 @Component({
   selector: 'app-icone-avaliacao',

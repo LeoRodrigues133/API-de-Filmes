@@ -1,18 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
+import { formatDate, NgFor } from '@angular/common';
 import { FilmeService } from '../../services/api.service';
-import { formatDate, NgFor, NgIf } from '@angular/common';
-import { ListagemDeFilme } from '../../models/listagem-de-filmes';
+import { ListagemDeFilme } from '../../models/Listagem-de-Filme';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { CardDeFilmesComponent } from "../shared/card-de-filmes/card-de-filmes.component";
+import { CardDeFilmesComponent } from "../shared/movie-card/movie-card.component";
+import { PaginationButtonComponent } from "../shared/pagination-button/pagination-button.component";
 
 @Component({
-  selector: 'app-listagem-de-filmes',
+  selector: 'app-movie-list',
   standalone: true,
-  imports: [NgFor, CardDeFilmesComponent],
-  templateUrl: './listagem-de-filmes.component.html',
-  styleUrl: './listagem-de-filmes.component.scss',
+  imports: [NgFor, CardDeFilmesComponent, PaginationButtonComponent],
+  templateUrl: './movie-list.component.html',
+  styleUrl: './movie-list.component.scss',
 })
-export class ListagemDeFilmesComponent implements OnInit {
+export class MovieListComponent implements OnInit {
   public filmes: ListagemDeFilme[] = [];
   private pagina: number = 1;
 
@@ -22,10 +23,10 @@ export class ListagemDeFilmesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.SearchPopularMovies();
+    this.loadPopularMovies();
   }
 
-  public SearchPopularMovies() {
+  public loadPopularMovies() {
     this.filmeService.SelectByPopular(this.pagina).subscribe((f) => {
 
       const resultado = f.results as any[];

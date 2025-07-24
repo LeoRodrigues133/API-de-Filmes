@@ -3,7 +3,7 @@ import { formatDate, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ResultadoBuscaDeFilmes } from '../../models/busca-de-filmes';
 import { SearchInputComponent } from "../search-input/search-input.component";
-import { ListagemDeFilme } from '../../models/listagem-de-filmes';
+import { ListagemDeFilme } from '../../models/Listagem-de-Filme';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { FilmeService } from '../../services/api.service';
 

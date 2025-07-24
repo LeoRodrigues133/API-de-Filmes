@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ListagemDeFilme } from '../../models/listagem-de-filmes';
 import { ResultadoBuscaDeFilmes } from '../../models/busca-de-filmes';
-import { formatDate, NgFor } from '@angular/common';
-import { FilmeService } from '../../services/api.service';
-import { LocalStorageService } from '../../services/local-storage.service';
+import {  NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-search-input',

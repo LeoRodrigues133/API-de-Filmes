@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { SearchComponent } from './components/search/search.component';
-import { ListagemDeFilmesComponent } from './components/listagem-de-filmes/listagem-de-filmes.component';
-import { DetalhamentoDeFilmesComponent } from './components/detalhamento-de-filmes/detalhamento-de-filmes.component';
+import { MovieListComponent } from './components/movie-list/movie-list.component';
+import { DetalhamentoDeFilmesComponent } from './components/movie-detail/movie-detail.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: ListagemDeFilmesComponent },
+  { path: 'home', component: MovieListComponent },
   { path: 'filme/:id', component: DetalhamentoDeFilmesComponent },
   { path: 'busca', component:  SearchComponent},
 ];
